@@ -3,12 +3,16 @@ class ChatsController < ApplicationController
   def index
   end
 
+  def new
+    @chat = Chat.new
+  end
+
   def create
-    @chat = Chat.new(chat_params)
-    @chat.user_id = current_user.id
+    chat = Chat.new(chat_params)
+    chat.user_id = current_user.id
 
     # 保存処理
-    if @chat.save
+    if chat.save
 
     else
 
@@ -16,6 +20,12 @@ class ChatsController < ApplicationController
   end
 
   def update
+    chat = Chat.find(params[:id])
+    if chat.update(chat_params)
+
+    else
+
+    end
   end
 
   def destroy
